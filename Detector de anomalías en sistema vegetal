@@ -1,0 +1,112 @@
+- `app.py`: archivo principal de la aplicación
+- `modelo.py`: archivo para definir y entrenar el modelo de detección de enfermedades
+- `utils.py`: archivo para funciones auxiliares
+- `data`: carpeta para almacenar las imágenes de entrenamiento y prueba
+- `models`: carpeta para almacenar los modelos entrenados
+
+app.py
+```
+import cv2
+import numpy as np
+from tensorflow.keras.models import load_model
+from modelo import cargar_modelo
+from utils import preprocesar_imagen, detectar_enfermedad
+
+# Cargar modelo de detección de enfermedades
+modelo = cargar_modelo('modelo_enfermedades.h5')
+
+# Función para detectar enfermedades en una imagen
+def detectar_enfermedad_en_imagen(imagen):
+    imagen_preprocesada = preprocesar_imagen(imagen)
+    prediccion = modelo.predict(imagen_preprocesada[np.newaxis, ...])
+    enfermedad = np.argmax(prediccion)
+    return enfermedad
+
+# Cargar imagen de la planta
+imagen = cv2.imread('imagen_planta.jpg')
+
+# Detectar enfermedad
+enfermedad = detectar_enfermedad_en_imagen(imagen)
+
+# Mostrar resultado
+print(f'La planta tiene la enfermedad {enfermedad}')
+```
+
+modelo.py
+```
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+# Definir el modelo de detección de enfermedades
+def definir_modelo():
+    modelo = Sequential()
+    modelo.add(Conv2D(32, (3, 3), activation='relu', input_shape=(224, 224, 3)))
+    modelo.add(MaxPooling2D((2, 2)))
+    modelo.add(Conv2D(64, (3, 3), activation='relu'))
+    modelo.add(MaxPooling2D((2, 2)))
+    modelo.add(Conv2D(128, (3, 3), activation='relu'))
+    modelo.add(MaxPooling2D((2, 2)))
+    modelo.add(Flatten())
+    modelo.add(Dense(128, activation='relu'))
+    modelo.add(Dense(len(enfermedades), activation='softmax'))
+    return modelo
+
+# Entrenar el modelo
+def entrenar_modelo(modelo, data_dir):
+    datagen = ImageDataGenerator(rescale=1./255)
+    train_generator = datagen.flow_from_directory(
+        data_dir + '/train',
+        target_size=(224, 224),
+        batch_size=32,
+        class_mode='categorical'
+    )
+    validation_generator = datagen.flow_from_directory(
+        data_dir + '/validation',
+        target_size=(224, 224),
+        batch_size=32,
+        class_mode='categorical'
+    )
+    modelo.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+    modelo.fit(train_generator, epochs=10, validation_data=validation_generator)
+
+# Cargar modelo entrenado
+def cargar_modelo(modelo_path):
+    return load_model(modelo_path)
+```
+
+utils.py
+```
+import cv2
+import numpy as np
+
+# Preprocesar imagen
+def preprocesar_imagen(imagen):
+    imagen = cv2.resize(imagen, (224, 224))
+    imagen = imagen / 255.0
+    return imagen
+
+# Detectar enfermedad
+def detectar_enfermedad(imagen, modelo):
+    prediccion = modelo.predict(imagen[np.newaxis, ...])
+    enfermedad = np.argmax(prediccion)
+    return enfermedad
+```
+
+*data*
+
+- `train`: carpeta para almacenar las imágenes de entrenamiento
+- `validation`: carpeta para almacenar las imágenes de validación
+
+*models*
+
+- `modelo_enfermedades.h5`: archivo del modelo entrenado
+
+Después siga los siguientes pasos 
+
+1. Prepare sus datos de entrenamiento y validación en la carpeta `data`
+2. Entrenen el modelo utilizando la función `entrenar_modelo` en `modelo.py`.
+3. Guarde el modelo entrenado en la carpeta `models`.
+4. Utilize la función `cargar_modelo` en `modelo.py` para cargar el modelo entrenado en su aplicación.
+5. Utilize la función `detectar_enfermedad` en `utils.py` para detectar enfermedades en imágenes.
