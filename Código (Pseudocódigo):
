@@ -1,0 +1,43 @@
+// Librerías a incluir (ej. para motores paso a paso, pantalla, Bluetooth)
+
+// Definición de pines para motores, luces, relés, sensores, etc.
+
+void setup() {
+  // Inicializar comunicación serial con Raspberry Pi
+  Serial.begin(115200);
+
+  // Inicializar Bluetooth (si es ESP32) o módulo Bluetooth (si es Arduino)
+
+  // Inicializar pantalla (si la controlas directamente desde el ESP32)
+
+  // Configurar pines GPIO como entradas/salidas
+  // Inicializar drivers de motor
+  // Inicializar sensores de corriente/voltaje
+}
+
+void loop() {
+  // 1. Leer comandos desde la pantalla Bluetooth
+  //    - Mover motores
+  //    - Encender/apagar/regular luces
+  //    - Ajustar parámetros de electroimanes
+
+  // 2. Ejecutar acciones basadas en los comandos:
+  //    - Controlar drivers de motor para mover espejos/enfoque
+  //    - Activar relés/MOSFETs para luces y ventiladores
+  //    - Enviar valores PWM para luces regulables
+  //    - Controlar fuentes de corriente/voltaje para electroimanes
+
+  // 3. Leer datos de sensores:
+  //    - Leer corriente y voltaje de electroimanes
+  //    - Leer estado de otros sensores si los hay
+
+  // 4. Enviar datos a la pantalla Bluetooth para mostrar estado
+  //    - Parámetros de electroimanes (Ohms, Watts, Voltaje, Amperaje)
+  //    - Posición de motores, estado de luces, etc.
+
+  // 5. Enviar datos a la Raspberry Pi (vía Serial)
+  //    - Estado del sistema
+  //    - Comandos para la Raspberry Pi (ej. "tomar foto espectrómetro", "tomar foto microscopio")
+
+  // Retrasos o bucles para permitir otras tareas
+}
