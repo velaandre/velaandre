@@ -1,0 +1,69 @@
+mport serial
+import cv2 # Para cámaras (OpenCV)
+import threading # Para manejar la comunicación serial y la interfaz de usuario en paralelo
+
+# Configurar puerto serial para comunicación con ESP32
+ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1) # Ajusta el puerto según sea necesario
+
+def read_from_esp32():
+    while True:
+        if ser.in_waiting > 0:
+            line = ser.readline().decode('utf-8').strip()
+            print(f"Recibido de ESP32: {line}")
+            # Procesar comandos o datos recibidos del ESP32
+
+def main():
+    # Iniciar hilo para leer del ESP32
+    serial_thread = threading.Thread(target=read_from_esp32)
+    serial_thread.daemon = True # El hilo se cierra cuando el programa principal lo hace
+    serial_thread.start()
+
+    # Inicializar cámaras (ejemplo con OpenCV)
+    cap_spectrometer = cv2.VideoCapture(0) # Ajusta el índice de la cámara
+    cap_microscope = cv2.VideoCapture(1) # Ajusta el índice de la cámara
+
+    # Verificar si las cámaras se abrieron correctamente
+    if not cap_spectrometer.isOpened():
+        print("Error: No se pudo abrir la cámara del espectrómetro.")
+        exit()
+    if not cap_microscope.isOpened():
+        print("Error: No se pudo abrir la cámara del microscopio.")
+        exit()
+
+    # Configurar ventanas para mostrar las cámaras
+    cv2.namedWindow('Espectrometro', cv2.WINDOW_NORMAL)
+    cv2.namedWindow('Microscopio', cv2.WINDOW_NORMAL)
+
+    while True:
+        ret_spec, frame_spec = cap_spectrometer.read()
+        ret_micro, frame_micro = cap_microscope.read()
+
+        if not ret_spec or not ret_micro:
+            print("Error al leer frames de las cámaras.")
+            break
+
+        # Mostrar frames
+        cv2.imshow('Espectrometro', frame_spec)
+        cv2.imshow('Microscopio', frame_micro)
+
+        # Aquí podrías agregar lógica para enviar comandos al ESP32
+        # ser.write(b"comando_a_esp32\n")
+
+        # Salir con 'q'
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # Liberar recursos de las cámaras
+    cap_spectrometer.release()
+    cap_microscope.release()
+    cv2.destroyAllWindows()
+    ser.close()
+
+if __name__ == "__main__":
+    main()
+ 
+
+Código 2
+
+
+espectroscopia cam
