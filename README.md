@@ -2,8 +2,8 @@
 
 
 
-Bienvenido a mi portafolio. Soy un desarrollador multidisciplinario con experiencia en Inteligencia Artificial, Blockchain, Ciberseguridad y Electrónica. Apasionado por la innovación, busco aportar soluciones reales y éticas, colaborando en proyectos de impacto global.
-
+Bienvenido
+. Soy multidisciplinario con experiencia en Inteligencia Artificial, Blockchain, Ciberseguridad y Electrónica. Apasionado por la innovación, busco aportar soluciones
 
 
 ---
@@ -26,30 +26,6 @@ Bienvenido a mi portafolio. Soy un desarrollador multidisciplinario con experien
 
 
 
----
-
-
-
-## 🚀 Proyectos destacados
-
-
-
-- **Microscopio Electrónico DIY (MEB):**
-
-  - Diseño y construcción de un microscopio electrónico e híbrido (ASG ,PRODUCT)
-
-  - Integración de hardware, software y visión computacional.
-
-- **Aplicación Blockchain personal:**
-
-  - Desarrollo de dApp con contratos inteligentes auditados.
-
-  - Enfoque en privacidad y seguridad.
-
-- **Herramientas de Ciberseguridad:**
-
-  - Scripts para pentesting, análisis de vulnerabilidades y detección automática de anomalías.
-
 
 
 ## 🤝 Contacto
@@ -60,7 +36,7 @@ Bienvenido a mi portafolio. Soy un desarrollador multidisciplinario con experien
 
 - LinkedIn: [https://www.linkedin.com/in/andrés-velazquez-9b593033a]
 
-- Email: [impriovlazquez10@gmail.com o velaandres248@gmail.com]
+- Email: [impriovlazquez10@gmail.com o velaandres248@gmail.com o grandwellnessllc1@gmail.com]
 
 
 
@@ -68,9 +44,8 @@ Bienvenido a mi portafolio. Soy un desarrollador multidisciplinario con experien
 
 
 
-## 🛡️ Compromiso ético
 
 
 
-Mis proyectos están orientados a la ética, la transparencia y el beneficio social. También estoy en busca de hacer un cambio por nuestro hogar nuestro planeta intento hacer todo lo que puedo para tener las mejores prácticas de asg pero el cambio climático. Estoy abierto a colaboraciones y retos que sigan estos valores.
 
+Mis proyectos están orientados a la ética, la transparencia y el beneficio social. También estoy en busca de hacer un cambio por nuestro hogar nuestr
